@@ -9,6 +9,8 @@ test('Get search bar', async ({page}) =>{
 
     await page.fill('input,[name="search"]','Food');
 
+    await page.waitForTimeout(5000);
+
     const searchValue = await page.inputValue('input[name="search"]');
     expect(searchValue).toBe('Food');
 })
