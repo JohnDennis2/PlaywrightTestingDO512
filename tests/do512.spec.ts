@@ -4,15 +4,17 @@ import { test, expect } from '@playwright/test'
 test('navigate to DO512', async ({page}) => {
     await page.goto('https://do512.com/');
 })
-test('Get search bar', async ({page}) =>{
-    await page.getByRole('link',({name:'search'}));
-
-    await page.waitForTimeout(5000);
-
-    await page.fill('input,[name="search"]','Food');
-
+test('should click on the dropdown by text', async ({ page }) => {
+    await page.goto('https://do512.com'); 
     
-
-    const searchValue = await page.inputValue('input[name="search"]');
-    expect(searchValue).toBe('Food');
-})
+    // Locate the link by its text
+    const dropdown = page.locator('a:has-text("events")'); 
+    
+    // Click the link
+    await dropdown.click();
+    
+    // Verify subsequent actions
+    const menuItem = page.locator('selector-for-menu-item'); 
+    await expect(menuItem).toBeVisible();
+  });
+  
